@@ -93,6 +93,10 @@ class ContentViewModel: ObservableObject {
                     for data in chartData {
                         self.writeChartDataToCsv(chartData: data, folderUrl: url)
                     }
+                    // only first + 100000 values since reading in octave take very long time
+                    if let firstChartData = chartData.first {
+                        self.writeOctaveMFile(csvFileName: "\(firstChartData.name).csv", amountValues: 100000, xLabel: firstChartData.timeUnit, yLabel: firstChartData.signalUnit, folderUrl: url)
+                    }
                 }
             }
         }
@@ -100,17 +104,39 @@ class ContentViewModel: ObservableObject {
     
     func writeChartDataToCsv(chartData: ChartData, folderUrl: URL) {
         var text = ""
-        text.append("dt (\(chartData.timeUnit)),\(chartData.signalUnit)\n")
+        text.append("dt(\(chartData.timeUnit)),\(chartData.signalUnit)\n")
         for (time, signal) in chartData.points {
             text.append("\(time),\(signal)\n")
         }
-
+        
         let fileName = "\(chartData.name).csv"
+        writeFile(fileName: fileName, folderUrl: folderUrl, text: text)
+    }
+    
+    func writeOctaveMFile(csvFileName: String, amountValues: Int, xLabel: String, yLabel: String, folderUrl: URL) {
+        var text = "clear all, fclose all\n"
+        text.append("fid = fopen('\(csvFileName)', 'r');\n")
+        text.append("header = fscanf(fid, '%s, %s', [2 1])\n")
+        text.append("A = fscanf(fid, '%f, %f', [2 \(amountValues)])\n")
+        text.append("B = A'\n")
+        text.append("fclose(fid);\n")
+        text.append("x = B(:,1);\n")
+        text.append("y = B(:,2);\n")
+        text.append("plot(x,y);\n")
+        text.append("set (gca, 'linewidth', 1, 'fontsize', 36)\n")
+        text.append("xlabel('\(xLabel)');\n")
+        text.append("ylabel('\(yLabel)');\n")
+        text.append("grid on\n")
+        
+        writeFile(fileName: "octave_script.m", folderUrl: folderUrl, text: text)
+    }
+    
+    func writeFile(fileName: String, folderUrl: URL, text: String) {
         let fileUrl = folderUrl.appendingPathComponent(fileName)
         do {
             try text.write(to: fileUrl, atomically: true, encoding: .utf8)
         } catch {
-           print("Failed to write csv file: \(error.localizedDescription)")
+            print("Failed to write csv file: \(error.localizedDescription)")
         }
     }
 }
