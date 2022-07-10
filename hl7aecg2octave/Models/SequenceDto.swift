@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct HL7aECGSequenceDto {
+struct SequenceDto {
     var code: String?
     var type: String?
     var timeIncrement: String?

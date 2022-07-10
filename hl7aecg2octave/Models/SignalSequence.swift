@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct HL7aECGSignalSequence {
+struct SignalSequence {
     let code: String
     let type: String
     let scale: Float

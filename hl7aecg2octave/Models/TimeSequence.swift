@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct HL7aECGTimeSequence {
+struct TimeSequence {
     let code: String
     let type: String
     let increment: Float

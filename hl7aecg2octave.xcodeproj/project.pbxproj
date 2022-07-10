@@ -7,13 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		52009B512879FFEB003FAC21 /* HL7aECGXmlParserDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52009B502879FFEB003FAC21 /* HL7aECGXmlParserDelegate.swift */; };
-		52009B53287A0A2E003FAC21 /* HL7aECGSequenceDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52009B52287A0A2E003FAC21 /* HL7aECGSequenceDto.swift */; };
+		52009B512879FFEB003FAC21 /* XmlParserDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52009B502879FFEB003FAC21 /* XmlParserDelegate.swift */; };
+		52009B53287A0A2E003FAC21 /* SequenceDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52009B52287A0A2E003FAC21 /* SequenceDto.swift */; };
 		52009B56287A0F4F003FAC21 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52009B55287A0F4F003FAC21 /* StringExtensions.swift */; };
 		520F3E16287ACCC600C250DC /* XmlTags.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520F3E15287ACCC600C250DC /* XmlTags.swift */; };
 		520F3E18287ACDC900C250DC /* XmlAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520F3E17287ACDC900C250DC /* XmlAttributes.swift */; };
-		520F3E1A287AD4E100C250DC /* HL7aECGTimeSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520F3E19287AD4E100C250DC /* HL7aECGTimeSequence.swift */; };
-		520F3E1C287AD56100C250DC /* HL7aECGSignalSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520F3E1B287AD56100C250DC /* HL7aECGSignalSequence.swift */; };
+		520F3E1A287AD4E100C250DC /* TimeSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520F3E19287AD4E100C250DC /* TimeSequence.swift */; };
+		520F3E1C287AD56100C250DC /* SignalSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520F3E1B287AD56100C250DC /* SignalSequence.swift */; };
+		520F3E1E287AE1A400C250DC /* ChartData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520F3E1D287AE1A400C250DC /* ChartData.swift */; };
 		521B37CE28794F62003FEA81 /* hl7aecg2octaveApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 521B37CD28794F62003FEA81 /* hl7aecg2octaveApp.swift */; };
 		521B37D028794F62003FEA81 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 521B37CF28794F62003FEA81 /* ContentView.swift */; };
 		521B37D228794F64003FEA81 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 521B37D128794F64003FEA81 /* Assets.xcassets */; };
@@ -22,13 +23,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		52009B502879FFEB003FAC21 /* HL7aECGXmlParserDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HL7aECGXmlParserDelegate.swift; sourceTree = "<group>"; };
-		52009B52287A0A2E003FAC21 /* HL7aECGSequenceDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HL7aECGSequenceDto.swift; sourceTree = "<group>"; };
+		52009B502879FFEB003FAC21 /* XmlParserDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XmlParserDelegate.swift; sourceTree = "<group>"; };
+		52009B52287A0A2E003FAC21 /* SequenceDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SequenceDto.swift; sourceTree = "<group>"; };
 		52009B55287A0F4F003FAC21 /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		520F3E15287ACCC600C250DC /* XmlTags.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XmlTags.swift; sourceTree = "<group>"; };
 		520F3E17287ACDC900C250DC /* XmlAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XmlAttributes.swift; sourceTree = "<group>"; };
-		520F3E19287AD4E100C250DC /* HL7aECGTimeSequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HL7aECGTimeSequence.swift; sourceTree = "<group>"; };
-		520F3E1B287AD56100C250DC /* HL7aECGSignalSequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HL7aECGSignalSequence.swift; sourceTree = "<group>"; };
+		520F3E19287AD4E100C250DC /* TimeSequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSequence.swift; sourceTree = "<group>"; };
+		520F3E1B287AD56100C250DC /* SignalSequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignalSequence.swift; sourceTree = "<group>"; };
+		520F3E1D287AE1A400C250DC /* ChartData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartData.swift; sourceTree = "<group>"; };
 		521B37CA28794F62003FEA81 /* hl7aecg2octave.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = hl7aecg2octave.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		521B37CD28794F62003FEA81 /* hl7aecg2octaveApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = hl7aecg2octaveApp.swift; sourceTree = "<group>"; };
 		521B37CF28794F62003FEA81 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -52,7 +54,7 @@
 		52009B4F2879FF93003FAC21 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				52009B502879FFEB003FAC21 /* HL7aECGXmlParserDelegate.swift */,
+				52009B502879FFEB003FAC21 /* XmlParserDelegate.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -134,9 +136,10 @@
 		521B37DE28795D24003FEA81 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				52009B52287A0A2E003FAC21 /* HL7aECGSequenceDto.swift */,
-				520F3E19287AD4E100C250DC /* HL7aECGTimeSequence.swift */,
-				520F3E1B287AD56100C250DC /* HL7aECGSignalSequence.swift */,
+				52009B52287A0A2E003FAC21 /* SequenceDto.swift */,
+				520F3E19287AD4E100C250DC /* TimeSequence.swift */,
+				520F3E1B287AD56100C250DC /* SignalSequence.swift */,
+				520F3E1D287AE1A400C250DC /* ChartData.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -214,13 +217,14 @@
 				52009B56287A0F4F003FAC21 /* StringExtensions.swift in Sources */,
 				520F3E16287ACCC600C250DC /* XmlTags.swift in Sources */,
 				521B37D028794F62003FEA81 /* ContentView.swift in Sources */,
-				52009B53287A0A2E003FAC21 /* HL7aECGSequenceDto.swift in Sources */,
-				520F3E1C287AD56100C250DC /* HL7aECGSignalSequence.swift in Sources */,
-				52009B512879FFEB003FAC21 /* HL7aECGXmlParserDelegate.swift in Sources */,
+				52009B53287A0A2E003FAC21 /* SequenceDto.swift in Sources */,
+				520F3E1C287AD56100C250DC /* SignalSequence.swift in Sources */,
+				52009B512879FFEB003FAC21 /* XmlParserDelegate.swift in Sources */,
 				521B37CE28794F62003FEA81 /* hl7aecg2octaveApp.swift in Sources */,
 				520F3E18287ACDC900C250DC /* XmlAttributes.swift in Sources */,
 				5275274C28796062004476BB /* ContentViewModel.swift in Sources */,
-				520F3E1A287AD4E100C250DC /* HL7aECGTimeSequence.swift in Sources */,
+				520F3E1E287AE1A400C250DC /* ChartData.swift in Sources */,
+				520F3E1A287AD4E100C250DC /* TimeSequence.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

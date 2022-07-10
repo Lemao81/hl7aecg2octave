@@ -7,13 +7,13 @@
 
 import Foundation
 
-class HL7aECGXmlParserDelegate: NSObject, XMLParserDelegate {
+class XmlParserDelegate: NSObject, XMLParserDelegate {
     private var isDigits: Bool = false
-    private var sequences: [HL7aECGSequenceDto] = []
-    private var currentSequence: HL7aECGSequenceDto? = nil
-    private var onCompleteHandler: (([HL7aECGSequenceDto]) -> Void)? = nil
+    private var sequences: [SequenceDto] = []
+    private var currentSequence: SequenceDto? = nil
+    private var onCompleteHandler: (([SequenceDto]) -> Void)? = nil
     
-    func parse(url: URL, onComplete: (([HL7aECGSequenceDto]) -> Void)?) {
+    func parse(url: URL, onComplete: (([SequenceDto]) -> Void)?) {
         onCompleteHandler = onComplete
         let parser = XMLParser(contentsOf: url)
         parser?.delegate = self
@@ -23,7 +23,7 @@ class HL7aECGXmlParserDelegate: NSObject, XMLParserDelegate {
     func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String] = [:]) {
         switch elementName.uppercased() {
             case XmlTags.sequence:
-                currentSequence = HL7aECGSequenceDto()
+                currentSequence = SequenceDto()
             case XmlTags.code:
                 currentSequence?.code = attributeDict[XmlAttributes.code]
             case XmlTags.value:
