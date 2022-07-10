@@ -13,8 +13,9 @@ class ContentViewModel: ObservableObject {
     func handleHL7aECGParsing() {
         if let xmlUrl = getHL7aECGFileUrl() {
             let parserDelegate = HL7aECGXmlParserDelegate()
-            parserDelegate.parse(url: xmlUrl) { (sequences: [HL7aECGSequence]) in
-                
+            parserDelegate.parse(url: xmlUrl) { (sequenceDtos: [HL7aECGSequenceDto]) in
+                let timeSequence = self.getTimeSequence(dtos: sequenceDtos)
+                let signalSequences = self.getSignalSequences(dtos: sequenceDtos)
             }
         }
     }
@@ -33,5 +34,19 @@ class ContentViewModel: ObservableObject {
         }
         
         return nil;
+    }
+    
+    func getTimeSequence(dtos: [HL7aECGSequenceDto]) -> HL7aECGTimeSequence {
+        if let timeDto = dtos.first(where: { $0.type?.equalsIgnoreCase(other: "GLIST_TS") ?? false }) {
+            return HL7aECGTimeSequence(code: timeDto.code, type: timeDto.type, increment: timeDto.timeIncrement, unit: timeDto.timeUnit)
+        }
+        
+        return HL7aECGTimeSequence()
+    }
+    
+    func getSignalSequences(dtos: [HL7aECGSequenceDto]) -> [HL7aECGSignalSequence] {
+        let signalDtos = dtos.filter({ $0.type?.equalsIgnoreCase(other: "SLIST_PQ") ?? false })
+        
+        return signalDtos.map({ HL7aECGSignalSequence(code: $0.code, type: $0.type, scale: $0.signalScale, unit: $0.signalUnit, digits: $0.digits )})
     }
 }

@@ -9,11 +9,11 @@ import Foundation
 
 class HL7aECGXmlParserDelegate: NSObject, XMLParserDelegate {
     private var isDigits: Bool = false
-    private var sequences: [HL7aECGSequence] = []
-    private var currentSequence: HL7aECGSequence? = nil
-    private var onCompleteHandler: (([HL7aECGSequence]) -> Void)? = nil
+    private var sequences: [HL7aECGSequenceDto] = []
+    private var currentSequence: HL7aECGSequenceDto? = nil
+    private var onCompleteHandler: (([HL7aECGSequenceDto]) -> Void)? = nil
     
-    func parse(url: URL, onComplete: (([HL7aECGSequence]) -> Void)?) {
+    func parse(url: URL, onComplete: (([HL7aECGSequenceDto]) -> Void)?) {
         onCompleteHandler = onComplete
         let parser = XMLParser(contentsOf: url)
         parser?.delegate = self
@@ -22,37 +22,44 @@ class HL7aECGXmlParserDelegate: NSObject, XMLParserDelegate {
     
     func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String] = [:]) {
         switch elementName.uppercased() {
-        case "SEQUENCE":
-            currentSequence = HL7aECGSequence()
-        case "CODE":
-            currentSequence?.code = attributeDict["code"] ?? ""
-        case "VALUE":
-            currentSequence?.type = attributeDict["xsi:type"] ?? ""
-        case "SCALE":
-            currentSequence?.scale = attributeDict["value"] ?? ""
-            currentSequence?.unit = attributeDict["unit"] ?? ""
-        case "DIGITS":
-            isDigits = true
-        default: break
+            case XmlTags.sequence:
+                currentSequence = HL7aECGSequenceDto()
+            case XmlTags.code:
+                currentSequence?.code = attributeDict[XmlAttributes.code]
+            case XmlTags.value:
+                currentSequence?.type = attributeDict[XmlAttributes.type]
+            case XmlTags.increment:
+                currentSequence?.timeIncrement = attributeDict[XmlAttributes.value]
+                currentSequence?.timeUnit = attributeDict[XmlAttributes.unit]
+            case XmlTags.scale:
+                currentSequence?.signalScale = attributeDict[XmlAttributes.value]
+                currentSequence?.signalUnit = attributeDict[XmlAttributes.unit]
+            case XmlTags.digits:
+                isDigits = true
+            default: break
         }
     }
     
     func parser(_ parser: XMLParser, foundCharacters string: String) {
         if (isDigits) {
-            currentSequence?.digits += string
+            if (currentSequence != nil && currentSequence?.digits == nil) {
+                currentSequence?.digits = ""
+            }
+            
+            currentSequence?.digits! += string
         }
     }
     
     func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
         switch elementName.uppercased() {
-        case "SEQUENCE":
-            if let currentSequenceNonNil = currentSequence {
-                sequences.append(currentSequenceNonNil)
-                currentSequence = nil
-            }
-        case "DIGITS":
-            isDigits = false
-        default: break
+            case XmlTags.sequence:
+                if let currentSequenceNonNil = currentSequence {
+                    sequences.append(currentSequenceNonNil)
+                    currentSequence = nil
+                }
+            case XmlTags.digits:
+                isDigits = false
+            default: break
         }
     }
     

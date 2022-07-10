@@ -8,8 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		52009B512879FFEB003FAC21 /* HL7aECGXmlParserDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52009B502879FFEB003FAC21 /* HL7aECGXmlParserDelegate.swift */; };
-		52009B53287A0A2E003FAC21 /* HL7aECGSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52009B52287A0A2E003FAC21 /* HL7aECGSequence.swift */; };
+		52009B53287A0A2E003FAC21 /* HL7aECGSequenceDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52009B52287A0A2E003FAC21 /* HL7aECGSequenceDto.swift */; };
 		52009B56287A0F4F003FAC21 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52009B55287A0F4F003FAC21 /* StringExtensions.swift */; };
+		520F3E16287ACCC600C250DC /* XmlTags.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520F3E15287ACCC600C250DC /* XmlTags.swift */; };
+		520F3E18287ACDC900C250DC /* XmlAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520F3E17287ACDC900C250DC /* XmlAttributes.swift */; };
+		520F3E1A287AD4E100C250DC /* HL7aECGTimeSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520F3E19287AD4E100C250DC /* HL7aECGTimeSequence.swift */; };
+		520F3E1C287AD56100C250DC /* HL7aECGSignalSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520F3E1B287AD56100C250DC /* HL7aECGSignalSequence.swift */; };
 		521B37CE28794F62003FEA81 /* hl7aecg2octaveApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 521B37CD28794F62003FEA81 /* hl7aecg2octaveApp.swift */; };
 		521B37D028794F62003FEA81 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 521B37CF28794F62003FEA81 /* ContentView.swift */; };
 		521B37D228794F64003FEA81 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 521B37D128794F64003FEA81 /* Assets.xcassets */; };
@@ -19,8 +23,12 @@
 
 /* Begin PBXFileReference section */
 		52009B502879FFEB003FAC21 /* HL7aECGXmlParserDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HL7aECGXmlParserDelegate.swift; sourceTree = "<group>"; };
-		52009B52287A0A2E003FAC21 /* HL7aECGSequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HL7aECGSequence.swift; sourceTree = "<group>"; };
+		52009B52287A0A2E003FAC21 /* HL7aECGSequenceDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HL7aECGSequenceDto.swift; sourceTree = "<group>"; };
 		52009B55287A0F4F003FAC21 /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
+		520F3E15287ACCC600C250DC /* XmlTags.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XmlTags.swift; sourceTree = "<group>"; };
+		520F3E17287ACDC900C250DC /* XmlAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XmlAttributes.swift; sourceTree = "<group>"; };
+		520F3E19287AD4E100C250DC /* HL7aECGTimeSequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HL7aECGTimeSequence.swift; sourceTree = "<group>"; };
+		520F3E1B287AD56100C250DC /* HL7aECGSignalSequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HL7aECGSignalSequence.swift; sourceTree = "<group>"; };
 		521B37CA28794F62003FEA81 /* hl7aecg2octave.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = hl7aecg2octave.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		521B37CD28794F62003FEA81 /* hl7aecg2octaveApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = hl7aecg2octaveApp.swift; sourceTree = "<group>"; };
 		521B37CF28794F62003FEA81 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -57,6 +65,15 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		520F3E14287ACCAA00C250DC /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				520F3E15287ACCC600C250DC /* XmlTags.swift */,
+				520F3E17287ACDC900C250DC /* XmlAttributes.swift */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
 		521B37C128794F62003FEA81 = {
 			isa = PBXGroup;
 			children = (
@@ -76,6 +93,7 @@
 		521B37CC28794F62003FEA81 /* hl7aecg2octave */ = {
 			isa = PBXGroup;
 			children = (
+				520F3E14287ACCAA00C250DC /* Constants */,
 				52009B54287A0F38003FAC21 /* Extensions */,
 				52009B4F2879FF93003FAC21 /* Services */,
 				521B37DE28795D24003FEA81 /* Models */,
@@ -116,7 +134,9 @@
 		521B37DE28795D24003FEA81 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				52009B52287A0A2E003FAC21 /* HL7aECGSequence.swift */,
+				52009B52287A0A2E003FAC21 /* HL7aECGSequenceDto.swift */,
+				520F3E19287AD4E100C250DC /* HL7aECGTimeSequence.swift */,
+				520F3E1B287AD56100C250DC /* HL7aECGSignalSequence.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -192,11 +212,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				52009B56287A0F4F003FAC21 /* StringExtensions.swift in Sources */,
+				520F3E16287ACCC600C250DC /* XmlTags.swift in Sources */,
 				521B37D028794F62003FEA81 /* ContentView.swift in Sources */,
-				52009B53287A0A2E003FAC21 /* HL7aECGSequence.swift in Sources */,
+				52009B53287A0A2E003FAC21 /* HL7aECGSequenceDto.swift in Sources */,
+				520F3E1C287AD56100C250DC /* HL7aECGSignalSequence.swift in Sources */,
 				52009B512879FFEB003FAC21 /* HL7aECGXmlParserDelegate.swift in Sources */,
 				521B37CE28794F62003FEA81 /* hl7aecg2octaveApp.swift in Sources */,
+				520F3E18287ACDC900C250DC /* XmlAttributes.swift in Sources */,
 				5275274C28796062004476BB /* ContentViewModel.swift in Sources */,
+				520F3E1A287AD4E100C250DC /* HL7aECGTimeSequence.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
