@@ -17,24 +17,21 @@ class ContentViewModel: ObservableObject {
                 let timeSequence = self.getTimeSequence(dtos: sequenceDtos)
                 let signalSequences = self.getSignalSequences(dtos: sequenceDtos)
                 let chartData = self.getChartData(timeSequence: timeSequence, signalSequences: signalSequences)
-                let fileWriteDirPath = self.getFileWriteDirectoryPath(xmlUrl: xmlUrl)
-                for data in chartData {
-                    self.writeChartDataToCsv(chartData: data, dirPath: fileWriteDirPath)
-                }
+                self.promptFolderAndSaveFiles(chartData: chartData)
             }
         }
     }
     
     func getHL7aECGFileUrl() -> URL? {
-        let dialog = NSOpenPanel();
-        dialog.title = "Select HL7-aECG xml file";
-        dialog.showsResizeIndicator = true;
-        dialog.showsHiddenFiles = false;
-        dialog.allowsMultipleSelection = false;
-        dialog.canChooseDirectories = false;
+        let dialog = NSOpenPanel()
+        dialog.title = "Select HL7-aECG xml file"
+        dialog.showsResizeIndicator = true
+        dialog.showsHiddenFiles = false
+        dialog.allowsMultipleSelection = false
+        dialog.canChooseDirectories = false
         dialog.allowedContentTypes = [.xml]
         
-        if (dialog.runModal() == NSApplication.ModalResponse.OK){
+        if (dialog.runModal() == NSApplication.ModalResponse.OK) {
             return dialog.url;
         }
         
@@ -72,10 +69,10 @@ class ContentViewModel: ObservableObject {
     func getDeltaT(sequence: TimeSequence) -> Float {
         switch sequence.unit {
             case "s":
-                return Float(sequence.increment) * Float(60)
+                return Float(sequence.increment) * Float(1)
             default:
                 // TODO throw error
-                return Float(sequence.increment) * Float(60)
+                return Float(sequence.increment) * Float(1)
         }
     }
     
@@ -83,23 +80,37 @@ class ContentViewModel: ObservableObject {
         return sequence.scale
     }
     
-    func getFileWriteDirectoryPath(xmlUrl: URL) -> String {
-        return String(xmlUrl.absoluteString.trimmingCharacters(in: CharacterSet(charactersIn: xmlUrl.lastPathComponent)))
+    func promptFolderAndSaveFiles(chartData: [ChartData]) {
+        let dialog = NSOpenPanel()
+        dialog.title = "Select folder to save files"
+        dialog.showsResizeIndicator = true
+        dialog.canChooseFiles = false
+        dialog.canChooseDirectories = true
+        dialog.canCreateDirectories = true
+        dialog.begin() { (result) in
+            if (result == NSApplication.ModalResponse.OK) {
+                if let url = dialog.url {
+                    for data in chartData {
+                        self.writeChartDataToCsv(chartData: data, folderUrl: url)
+                    }
+                }
+            }
+        }
     }
     
-    func writeChartDataToCsv(chartData: ChartData, dirPath: String) {
+    func writeChartDataToCsv(chartData: ChartData, folderUrl: URL) {
         var text = ""
-        text.append("\(chartData.timeUnit),\(chartData.signalUnit)\n")
+        text.append("dt (\(chartData.timeUnit)),\(chartData.signalUnit)\n")
         for (time, signal) in chartData.points {
             text.append("\(time),\(signal)\n")
         }
-        
+
         let fileName = "\(chartData.name).csv"
-        let url = URL(fileURLWithPath: dirPath).appendingPathComponent(fileName)
+        let fileUrl = folderUrl.appendingPathComponent(fileName)
         do {
-            try text.write(to: url, atomically: true, encoding: .utf8)
+            try text.write(to: fileUrl, atomically: true, encoding: .utf8)
         } catch {
-            print("Failed to write csv file: \(error.localizedDescription)")
+           print("Failed to write csv file: \(error.localizedDescription)")
         }
     }
 }
